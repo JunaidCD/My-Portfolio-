@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { useCreateMessage } from "../../hooks/use-messages";
-import { Loader2, Send, Github, Linkedin, Terminal } from "lucide-react";
+import { Loader2, Send, Github, Linkedin, Terminal, Twitter } from "lucide-react";
 
 // Use schema from API contract for validation
 const contactSchema = api.messages.create.input;
@@ -65,6 +65,10 @@ export function Contact() {
                   <a href="#" className="flex items-center gap-4 text-muted-foreground hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5">
                     <Linkedin className="w-5 h-5 text-secondary" />
                     <span className="font-mono">linkedin.com/in/junaidcd</span>
+                  </a>
+                  <a href="https://x.com/JunaidMollah5" target="_blank" rel="noreferrer" className="flex items-center gap-4 text-muted-foreground hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5">
+                    <Twitter className="w-5 h-5 text-accent" />
+                    <span className="font-mono">x.com/JunaidMollah5</span>
                   </a>
                 </div>
               </div>

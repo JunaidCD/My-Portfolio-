@@ -27,8 +27,8 @@ export function Hero() {
               className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6"
             >
               Junaid Mollah<br />
-              <span className="text-2xl sm:text-3xl lg:text-4xl text-primary font-mono block mt-2">
-                Smart Contract Developer | DeFi & Web3 Builder
+              <span className="text-2xl sm:text-3xl lg:text-4xl text-primary font-mono block mt-4">
+                Smart Contract Developer <span className="text-muted-foreground/30 mx-2">/</span> DeFi & Web3 Builder
               </span>
             </motion.h1>
             
@@ -38,7 +38,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-xl leading-relaxed"
             >
-              I build Web3 systems with a deep focus on core blockchain and EVM fundamentals. I write and test smart contracts using Solidity and Rust, and leverage development environments like Foundry, Hardhat and interaction libraries such as Viem and web3 SDKs for reliable contract workflows.
+              Architecting the trustless protocols of tomorrow. Specializing in secure, gas-optimized smart contracts and decentralized systems that redefine digital ownership.
             </motion.p>
             
             <motion.div 
@@ -55,10 +55,6 @@ export function Hero() {
               <a href="https://github.com/JunaidCD" target="_blank" rel="noreferrer" className="px-8 py-4 rounded-xl glass-card font-semibold flex items-center gap-2 hover:bg-white/5 transition-all text-white">
                 <Github className="w-4 h-4" />
                 GitHub
-              </a>
-
-              <a href="https://x.com/JunaidMollah5" target="_blank" rel="noreferrer" className="p-4 rounded-xl glass-card hover:bg-white/5 transition-all text-muted-foreground hover:text-white">
-                <Twitter className="w-5 h-5" />
               </a>
 
               <Link href="/contact" className="p-4 rounded-xl glass-card hover:bg-white/5 transition-all text-muted-foreground hover:text-white">
