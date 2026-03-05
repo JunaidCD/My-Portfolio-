@@ -3,10 +3,10 @@ import { Code2, Cpu, Lock, Network } from "lucide-react";
 
 export function About() {
   const focuses = [
-    { icon: Code2, title: "Smart Contracts", desc: "Secure, gas-optimized Solidity development." },
-    { icon: Network, title: "DeFi Protocols", desc: "Building DEXs, lending platforms, and yield aggregators." },
-    { icon: Lock, title: "Zero Knowledge", desc: "Exploring ZK-rollups and privacy-preserving dApps." },
-    { icon: Cpu, title: "Layer 2", desc: "Scaling Ethereum with Arbitrum and Optimism ecosystems." },
+    { icon: Code2, title: "EVM Internals", desc: "Deep understanding of Ethereum Virtual Machine mechanics and gas optimization." },
+    { icon: Network, title: "DeFi Systems", desc: "Building scalable on-chain logic with decentralized indexing (The Graph)." },
+    { icon: Lock, title: "Smart Contract Security", desc: "Implementing reentrancy guards and following OpenZeppelin best practices." },
+    { icon: Cpu, title: "Layer 2 Scaling", desc: "Optimizing execution on Arbitrum, Polygon, and other L2 environments." },
   ];
 
   return (
@@ -16,7 +16,7 @@ export function About() {
         <Reveal>
           <div className="flex flex-col items-center text-center mb-16">
             <h2 className="text-sm font-mono text-primary mb-2 tracking-widest uppercase">01. Initialization</h2>
-            <h3 className="text-3xl md:text-5xl font-display font-bold">About the <span className="text-glow-purple text-secondary">Protocol</span></h3>
+            <h3 className="text-3xl md:text-5xl font-display font-bold">About <span className="text-glow-purple text-secondary">Me</span></h3>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-transparent mt-6 rounded-full" />
           </div>
         </Reveal>
@@ -25,13 +25,13 @@ export function About() {
           <Reveal direction="right">
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
-                I am a specialized <strong className="text-white font-medium">Blockchain Engineer</strong> with a deep passion for building the trustless infrastructure of tomorrow. 
+                I build Web3 systems with a deep focus on core blockchain and EVM fundamentals. I write and test smart contracts using <strong className="text-white font-medium">Solidity and Rust</strong>, and leverage development environments like <strong className="text-white font-medium">Foundry, Hardhat</strong> and interaction libraries such as Viem and web3 SDKs for reliable contract workflows.
               </p>
               <p>
-                My journey in Web3 started with a fascination for decentralized consensus and has evolved into engineering robust protocol layers, optimizing smart contracts, and exploring the bleeding edge of cryptographic proofs.
+                I connect on-chain logic with off-chain systems using decentralized indexing and storage (The Graph, IPFS) and scalable RPC infrastructure. I work with Layer-2 environments for performance and cost-efficient execution. 
               </p>
               <p>
-                Whether it's designing complex DeFi mechanisms, auditing smart contracts for vulnerabilities, or building seamless dApp frontends, I bridge the gap between complex blockchain mechanics and usable products.
+                I’m focused on advancing smart contract delivery and tooling while engaging with teams pushing Web3 technology forward.
               </p>
             </div>
           </Reveal>

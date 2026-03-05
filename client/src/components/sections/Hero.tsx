@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Mail } from "lucide-react";
+import { ArrowRight, Github, Mail, Twitter } from "lucide-react";
 import { TerminalSnippet } from "../TerminalSnippet";
+import { Link } from "wouter";
 
 export function Hero() {
   return (
@@ -25,9 +26,10 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6"
             >
-              Building the <br />
-              <span className="gradient-text">Decentralized</span> <br />
-              Future.
+              Junaid Mollah<br />
+              <span className="text-2xl sm:text-3xl lg:text-4xl text-primary font-mono block mt-2">
+                Smart Contract Developer | DeFi & Web3 Builder
+              </span>
             </motion.h1>
             
             <motion.p 
@@ -36,7 +38,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-xl leading-relaxed"
             >
-              Blockchain Engineer & Web3 Developer specializing in Smart Contracts, DeFi protocols, and Layer 2 ecosystems. Turning complex cryptography into elegant solutions.
+              I build Web3 systems with a deep focus on core blockchain and EVM fundamentals. I write and test smart contracts using Solidity and Rust, and leverage development environments like Foundry, Hardhat and interaction libraries such as Viem and web3 SDKs for reliable contract workflows.
             </motion.p>
             
             <motion.div 
@@ -45,19 +47,23 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap items-center gap-4"
             >
-              <a href="#projects" className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all box-glow-cyan group">
+              <Link href="/projects" className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all box-glow-cyan group">
                 View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
               
               <a href="https://github.com/JunaidCD" target="_blank" rel="noreferrer" className="px-8 py-4 rounded-xl glass-card font-semibold flex items-center gap-2 hover:bg-white/5 transition-all text-white">
                 <Github className="w-4 h-4" />
                 GitHub
               </a>
 
-              <a href="#contact" className="p-4 rounded-xl glass-card hover:bg-white/5 transition-all text-muted-foreground hover:text-white">
-                <Mail className="w-5 h-5" />
+              <a href="https://x.com/JunaidMollah5" target="_blank" rel="noreferrer" className="p-4 rounded-xl glass-card hover:bg-white/5 transition-all text-muted-foreground hover:text-white">
+                <Twitter className="w-5 h-5" />
               </a>
+
+              <Link href="/contact" className="p-4 rounded-xl glass-card hover:bg-white/5 transition-all text-muted-foreground hover:text-white">
+                <Mail className="w-5 h-5" />
+              </Link>
             </motion.div>
           </div>
 

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Wallet, Terminal, Github } from "lucide-react";
+import { Menu, X, Wallet, Terminal, Github, Twitter } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [walletConnected, setWalletConnected] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -14,10 +16,11 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Achievements", href: "/achievements" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const handleWalletClick = () => {
@@ -35,31 +38,41 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center box-glow-cyan">
               <Terminal className="w-5 h-5 text-white" />
             </div>
-            <span className="font-display font-bold text-xl tracking-tight hidden sm:block">
-              JCD<span className="text-primary">.eth</span>
+            <span className="font-display font-bold text-xl tracking-tight hidden sm:block text-white">
+              Junaid<span className="text-primary">.dev</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors relative group"
+                className={`text-sm font-medium transition-colors relative group ${
+                  location === link.href ? "text-primary" : "text-muted-foreground hover:text-white"
+                }`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </a>
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location === link.href ? "w-full" : "w-0 group-hover:w-full"}`} />
+              </Link>
             ))}
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-4">
+            <a 
+              href="https://x.com/JunaidMollah5" 
+              target="_blank" 
+              rel="noreferrer"
+              className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+            >
+              <Twitter className="w-5 h-5 text-muted-foreground hover:text-white" />
+            </a>
             <a 
               href="https://github.com/JunaidCD" 
               target="_blank" 
@@ -105,14 +118,16 @@ export function Navbar() {
           >
             <div className="flex flex-col px-4 py-6 space-y-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors"
+                  className={`text-lg font-medium transition-colors ${
+                    location === link.href ? "text-primary" : "text-muted-foreground hover:text-primary"
+                  }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <div className="pt-4 border-t border-white/10 flex flex-col gap-4">
                 <button
