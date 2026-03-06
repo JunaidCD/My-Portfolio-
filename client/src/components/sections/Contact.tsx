@@ -154,7 +154,7 @@ export function Contact() {
                           {...form.register("name")}
                           id="name"
                           className="w-full bg-black/50 border border-[#00ff41]/20 rounded-sm px-3 py-2 pl-8 text-sm font-mono text-white focus:outline-none focus:border-[#00ff41] transition-colors"
-                          placeholder="enter_name"
+                          placeholder="Satoshi Nakamoto"
                         />
                       </div>
                       {form.formState.errors.name && (
@@ -176,7 +176,7 @@ export function Contact() {
                           id="email"
                           type="email"
                           className="w-full bg-black/50 border border-[#00ff41]/20 rounded-sm px-3 py-2 pl-8 text-sm font-mono text-white focus:outline-none focus:border-[#00ff41] transition-colors"
-                          placeholder="user@email.com"
+                          placeholder="Satoshi@gmail.com"
                         />
                       </div>
                       {form.formState.errors.email && (
@@ -199,7 +199,7 @@ export function Contact() {
                         id="message"
                         rows={5}
                         className="w-full bg-black/50 border border-[#00ff41]/20 rounded-sm px-3 py-2 pl-10 text-sm font-mono text-white focus:outline-none focus:border-[#00ff41] transition-colors resize-none"
-                        placeholder="Enter message data..."
+                        placeholder="Deploying smart contract on mainnet..."
                       />
                     </div>
                     {form.formState.errors.message && (
