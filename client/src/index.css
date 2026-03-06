@@ -479,3 +479,21 @@ input:focus, textarea:focus, select:focus {
   @apply border-primary;
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
+
+/* Hide any overlay banners */
+[class*="replit"], [id*="replit"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide iframe-based injections */
+iframe[src*="replit"] {
+  display: none !important;
+}
+
+/* Hide any element with replit in aria-label or title */
+[aria-label*="replit"], [title*="replit"] {
+  display: none !important;
+}
