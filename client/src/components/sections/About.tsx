@@ -193,13 +193,13 @@ export function About() {
                         <td className="py-2 text-[#00ff41]">0x7d2f...8e4a</td>
                       </tr>
                       <tr className="border-t border-[#00ff41]/10">
-                        <td className="py-2 pr-4 text-[#00ff41]/50">2022 - 2023</td>
+                        <td className="py-2 pr-4 text-[#00ff41]/50">2024 - Present</td>
                         <td className="py-2 pr-4 text-white">Web3 Frontend Integration</td>
                         <td className="py-2 pr-4"><span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-sm text-[10px]">● CONFIRMED</span></td>
                         <td className="py-2 text-[#00ff41]">0x3a1b...9c2d</td>
                       </tr>
                       <tr className="border-t border-[#00ff41]/10">
-                        <td className="py-2 pr-4 text-[#00ff41]/50">2021 - 2022</td>
+                        <td className="py-2 pr-4 text-[#00ff41]/50">2023</td>
                         <td className="py-2 pr-4 text-white">Blockchain Fundamentals</td>
                         <td className="py-2 pr-4"><span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-sm text-[10px]">● CONFIRMED</span></td>
                         <td className="py-2 text-[#00ff41]">0x5f8e...1a3b</td>
