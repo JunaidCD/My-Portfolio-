@@ -107,7 +107,7 @@ export function Hero() {
             >
               <span className="text-white">Junaid</span>
               <br />
-              <span className="text-[#00ff41]">Molla</span>
+              <span className="text-[#00ff41] text-shadow-[0_0_10px_rgba(0,255,65,0.8)]">Mollah</span>
               <span className="cursor-blink">_</span>
             </motion.h1>
             
