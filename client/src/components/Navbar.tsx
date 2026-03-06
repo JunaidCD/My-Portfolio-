@@ -6,11 +6,21 @@ import { Link, useLocation } from "wouter";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [walletConnected, setWalletConnected] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('walletConnected') === 'true';
+    }
+    return false;
+  });
   const [connecting, setConnecting] = useState(false);
   const [location] = useLocation();
   const [systemTime, setSystemTime] = useState('00:00:00');
   const [uptime, setUptime] = useState(0);
+
+  // Persist wallet connection state
+  useEffect(() => {
+    localStorage.setItem('walletConnected', String(walletConnected));
+  }, [walletConnected]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
