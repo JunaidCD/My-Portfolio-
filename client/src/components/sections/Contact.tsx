@@ -2,21 +2,22 @@ import { Reveal } from "../Reveal";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Loader2, Send, Github, Linkedin, Terminal, Twitter, MapPin, Hash, Clock, Check, AlertCircle, User, Mail, FileText } from "lucide-react";
+import { Loader2, Send, Github, Linkedin, Terminal, Twitter, MapPin, Hash, Clock, Check, AlertCircle, User, Mail, FileText, Tag } from "lucide-react";
 
 // EmailJS Configuration - Replace with your own credentials from https://www.emailjs.com/
 // 1. Create account at EmailJS
 // 2. Add Email Service (Gmail, Outlook, etc.)
 // 3. Create Email Template
 // 4. Get your Public Key, Service ID, and Template ID
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "8GXx3n-IvhK-44Cuh";
+const EMAILJS_SERVICE_ID = "service_62pkcdr";
+const EMAILJS_TEMPLATE_ID = "template_7hvbec4";
 
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: ""
   });
   const [isSending, setIsSending] = useState(false);
@@ -42,14 +43,20 @@ export function Contact() {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
+          subject: formData.subject,
         },
         EMAILJS_PUBLIC_KEY
       );
       setSendStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error: any) {
       console.error("EmailJS Error:", error);
-      setSendStatus("error");
+      // Check for specific error codes
+      if (error?.text?.includes("template")) {
+        setSendStatus("error");
+      } else {
+        setSendStatus("error");
+      }
     } finally {
       setIsSending(false);
     }
@@ -176,6 +183,24 @@ export function Contact() {
                         required
                         className="w-full bg-black/50 border border-[#00ff41]/20 rounded-sm px-3 py-2 pl-8 text-sm font-mono text-white focus:outline-none focus:border-[#00ff41] transition-colors"
                         placeholder="Satoshi@gmail.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono text-[#00ff41]/50">
+                      <span className="text-[#00ff41]/30">{'//'}</span> subject
+                    </label>
+                    <div className="relative">
+                      <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#00ff41]/50" />
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-black/50 border border-[#00ff41]/20 rounded-sm px-3 py-2 pl-8 text-sm font-mono text-white focus:outline-none focus:border-[#00ff41] transition-colors"
+                        placeholder="Smart Contract Deployment Request"
                       />
                     </div>
                   </div>
