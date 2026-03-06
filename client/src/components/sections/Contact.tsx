@@ -101,7 +101,7 @@ export function Contact() {
                       <Github className="w-3.5 h-3.5" />
                       <span>github.com/JunaidCD</span>
                     </a>
-                    <a href="#" className="flex items-center gap-3 text-xs font-mono text-[#00ff41]/60 hover:text-[#00ff41] transition-colors p-2 rounded-sm hover:bg-[#00ff41]/5">
+                    <a href="https://www.linkedin.com/in/junaid-mollah-a59150319/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-xs font-mono text-[#00ff41]/60 hover:text-[#00ff41] transition-colors p-2 rounded-sm hover:bg-[#00ff41]/5">
                       <Linkedin className="w-3.5 h-3.5" />
                       <span>linkedin.com/in/junaidcd</span>
                     </a>
