@@ -6,6 +6,9 @@ import { Link, useLocation } from "wouter";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [connecting, setConnecting] = useState(false);
   const [location] = useLocation();
   const [systemTime, setSystemTime] = useState('00:00:00');
   const [uptime, setUptime] = useState(0);
@@ -145,9 +148,12 @@ export function Navbar() {
             </a>
             
             {/* Execute button - Terminal style */}
-            <button className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-sm bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/30 hover:bg-[#00ff41]/20 transition-colors text-xs font-mono">
+            <button 
+              onClick={() => setShowWalletModal(true)}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-sm bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/30 hover:bg-[#00ff41]/20 transition-colors text-xs font-mono"
+            >
               <Link2 className="w-3 h-3" />
-              ./connect.sh
+              {walletConnected ? '0x742d...3E7' : './connect.sh'}
             </button>
 
             {/* Mobile menu toggle */}
@@ -194,6 +200,129 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fake Metamask Connection Modal */}
+      <AnimatePresence>
+        {showWalletModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80"
+            onClick={() => !connecting && setShowWalletModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-[#0a0a0a] border border-[#00ff41]/30 rounded-lg p-6 max-w-sm w-full mx-4 shadow-[0_0_30px_rgba(0,255,65,0.2)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {!walletConnected ? (
+                <>
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-lg font-mono text-white">Connect Wallet</h3>
+                    <button 
+                      onClick={() => setShowWalletModal(false)}
+                      className="text-[#00ff41]/50 hover:text-[#00ff41]"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  
+                  {/* Fake Metamask option */}
+                  <button
+                    onClick={() => {
+                      setConnecting(true);
+                      setTimeout(() => {
+                        setWalletConnected(true);
+                        setConnecting(false);
+                        setShowWalletModal(false);
+                      }, 1500);
+                    }}
+                    disabled={connecting}
+                    className="w-full flex items-center gap-3 p-4 bg-[#00ff41]/5 border border-[#00ff41]/20 rounded-lg hover:bg-[#00ff41]/10 hover:border-[#00ff41]/40 transition-all disabled:opacity-50"
+                  >
+                    {connecting ? (
+                      <>
+                        <div className="w-8 h-8 border-2 border-[#00ff41]/30 border-t-[#00ff41] rounded-full animate-spin" />
+                        <span className="font-mono text-[#00ff41]">Connecting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-8 h-8 rounded-full bg-[#00ff41]/20 flex items-center justify-center">
+                          <span className="text-[#00ff41] font-bold">M</span>
+                        </div>
+                        <div className="text-left">
+                          <div className="font-mono text-white">MetaMask</div>
+                          <div className="text-xs text-[#00ff41]/50 font-mono">Not installed</div>
+                        </div>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Fake connected wallet display */}
+                  <div className="mt-4 p-3 bg-[#00ff41]/5 border border-[#00ff41]/20 rounded-lg">
+                    <div className="text-xs text-[#00ff41]/50 font-mono mb-1">Demo Mode</div>
+                    <div className="font-mono text-sm text-white">Click to simulate connection</div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-lg font-mono text-white">Wallet Connected</h3>
+                    <button 
+                      onClick={() => setShowWalletModal(false)}
+                      className="text-[#00ff41]/50 hover:text-[#00ff41]"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="p-4 bg-[#00ff41]/5 border border-[#00ff41]/30 rounded-lg">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-[#00ff41]/20 flex items-center justify-center">
+                          <span className="text-[#00ff41] font-bold text-lg">M</span>
+                        </div>
+                        <div>
+                          <div className="font-mono text-white font-medium">MetaMask</div>
+                          <div className="text-xs text-[#00ff41]/50 font-mono">Connected</div>
+                        </div>
+                      </div>
+                      <div className="font-mono text-sm text-white bg-black/30 p-2 rounded flex items-center justify-between">
+                        <span>0x742d35Cc6634C0532925a3b844Bc9e7595f4B3E7</span>
+                        <button className="text-[#00ff41] hover:text-white ml-2">📋</button>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                      <div className="p-2 bg-black/30 rounded">
+                        <div className="text-[#00ff41]/50">Balance</div>
+                        <div className="text-white">4.32 ETH</div>
+                      </div>
+                      <div className="p-2 bg-black/30 rounded">
+                        <div className="text-[#00ff41]/50">Network</div>
+                        <div className="text-white">Ethereum</div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setWalletConnected(false);
+                        setShowWalletModal(false);
+                      }}
+                      className="w-full py-2 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg font-mono text-sm hover:bg-red-500/20 transition-all"
+                    >
+                      Disconnect
+                    </button>
+                  </div>
+                </>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
