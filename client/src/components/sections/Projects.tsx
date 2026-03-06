@@ -44,10 +44,10 @@ const FEATURED_REPOS = [
     commitHash: "5f",
   },
   { 
-    name: "ERC208e1a-Mock-USDC", 
+    name: "ERC20-Mock-USDC", 
     description: "Mock USDC implementation for testing DeFi protocols with realistic token behavior.", 
     language: "Solidity", 
-    url: "https://github.com/JunaidCD/ERC20-Mock-USDC",
+    url: "https://github.com/JunaidCD/ERC20-Mock-USDC-",
     category: "Infrastructure",
     contractAddress: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
     txCount: 8942,
