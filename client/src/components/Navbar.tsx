@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Terminal, Github, Twitter, Link2, Activity, Cpu } from "lucide-react";
+import { Menu, X, Terminal, Github, Link2, Activity, Cpu } from "lucide-react";
+import { XLogo } from "./ui/XLogo";
 import { Link, useLocation } from "wouter";
 
 export function Navbar() {
@@ -153,7 +154,7 @@ export function Navbar() {
               rel="noreferrer"
               className="flex items-center justify-center w-7 h-7 rounded-sm bg-black/50 border border-[#00ff41]/20 hover:bg-[#00ff41]/10 hover:border-[#00ff41]/40 transition-all"
             >
-              <Twitter className="w-3.5 h-3.5 text-[#00ff41]/60 hover:text-[#00ff41]" />
+              <XLogo className="w-3.5 h-3.5 text-[#00ff41]/60 hover:text-[#00ff41]" />
             </a>
             
             {/* Execute button - Terminal style - shows address when connected */}

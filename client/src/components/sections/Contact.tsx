@@ -2,7 +2,8 @@ import { Reveal } from "../Reveal";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Loader2, Send, Github, Linkedin, Terminal, Twitter, MapPin, Hash, Clock, Check, AlertCircle, User, Mail, FileText, Tag } from "lucide-react";
+import { Loader2, Send, Github, Linkedin, Terminal, MapPin, Hash, Clock, Check, AlertCircle, User, Mail, FileText, Tag } from "lucide-react";
+import { XLogo } from "../ui/XLogo";
 
 // EmailJS Configuration - Replace with your own credentials from https://www.emailjs.com/
 // 1. Create account at EmailJS
@@ -118,7 +119,7 @@ export function Contact() {
                     <span>linkedin.com/in/junaid-mollah-a59150319</span>
                   </a>
                   <a href="https://x.com/JunaidMollah5" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-xs font-mono text-[#00ff41]/60 hover:text-[#00ff41] transition-colors p-2 rounded-sm hover:bg-[#00ff41]/5">
-                    <Twitter className="w-3.5 h-3.5" />
+                    <XLogo className="w-3.5 h-3.5" />
                     <span>x.com/JunaidMollah5</span>
                   </a>
                 </div>

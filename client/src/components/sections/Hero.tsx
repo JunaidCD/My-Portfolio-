@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Twitter, Copy, Check, Activity, Zap, Shield, Database, Terminal, Cpu, HardDrive, Clock } from "lucide-react";
+import { ArrowRight, Github, Copy, Check, Activity, Zap, Shield, Database, Terminal, Cpu, HardDrive, Clock } from "lucide-react";
+import { XLogo } from "../ui/XLogo";
 import { Link } from "wouter";
 
 // ASCII Art Banner
@@ -122,7 +123,7 @@ export function Hero() {
               </span>
               <span className="text-white/20">|</span>
               <span className="px-3 py-1 rounded-sm bg-[#00ff41]/10 border border-[#00ff41]/20 text-xs font-mono text-[#00ff41]">
-                {'>'} DeFi Builder
+                {'>'} Web3.0 Dev
               </span>
             </motion.div>
             
@@ -218,7 +219,7 @@ export function Hero() {
                 rel="noreferrer" 
                 className="p-2 rounded-sm bg-black/50 border border-[#00ff41]/30 text-[#00ff41]/60 hover:text-[#00ff41] hover:border-[#00ff41]/50 transition-colors"
               >
-                <Twitter className="w-4 h-4" />
+                <XLogo className="w-4 h-4" />
               </a>
             </motion.div>
           </div>
