@@ -1,80 +1,199 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Protocol Dark Theme - Clean & Minimal */
+  /* Blockchain Explorer Theme - Etherscan/Blockscout Inspired */
   --font-sans: 'Inter', sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
 
-  /* Pure dark background */
-  --background: 240 8% 4%;
+  /* Deep dark background */
+  --background: 222 47% 3%;
   --foreground: 0 0% 100%;
 
-  --card: 240 8% 6%;
+  --card: 222 47% 5%;
   --card-foreground: 0 0% 100%;
 
-  --popover: 240 8% 6%;
+  --popover: 222 47% 5%;
   --popover-foreground: 0 0% 100%;
 
-  /* Primary accent - Cyan only */
+  /* Cyan accent for blockchain */
   --primary: 187 100% 50%;
-  --primary-foreground: 240 8% 4%;
+  --primary-foreground: 222 47% 3%;
   
   /* Muted for secondary text */
-  --secondary: 240 5% 35%;
+  --secondary: 215 14% 25%;
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 240 5% 12%;
-  --muted-foreground: 240 5% 55%;
+  --muted: 215 14% 12%;
+  --muted-foreground: 215 14% 60%;
 
   --accent: 187 100% 50%;
-  --accent-foreground: 240 8% 4%;
+  --accent-foreground: 222 47% 3%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
+  /* Status colors */
+  --success: 142 76% 36%;
+  --success-foreground: 0 0% 100%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 0 0% 0%;
+  --error: 0 84% 60%;
+  --error-foreground: 0 0% 100%;
+  --info: 199 89% 48%;
+  --info-foreground: 0 0% 100%;
 
-  --border: 240 8% 15%;
-  --input: 240 8% 10%;
+  --border: 215 14% 18%;
+  --input: 215 14% 10%;
   --ring: 187 100% 50%;
 
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 }
 
 @layer base {
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
     font-family: var(--font-sans);
+    background: 
+      radial-gradient(ellipse at top, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(222, 47%, 3%) 0%, hsl(222, 47%, 5%) 100%);
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
   }
   
-  code, pre {
+  code, pre, .font-mono {
     font-family: var(--font-mono);
+  }
+
+  /* Data table styling */
+  table {
+    @apply w-full border-collapse;
+  }
+  
+  th {
+    @apply text-left text-xs font-mono uppercase tracking-wider text-muted-foreground bg-muted/30;
+  }
+  
+  td {
+    @apply text-sm font-mono;
   }
 }
 
 @layer utilities {
-  /* Minimal glass effect */
-  .glass-card {
-    @apply bg-card border border-border transition-colors duration-200;
+  /* Blockchain card - explorer style */
+  .block-card {
+    @apply bg-card border border-border rounded-sm transition-all duration-200;
   }
 
-  .glass-card:hover {
-    @apply border-primary/30;
+  .block-card:hover {
+    @apply border-primary/40 shadow-[0_0_20px_rgba(0,240,255,0.1)];
   }
 
-  /* Subtle glow - minimal usage */
-  .text-glow {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  /* Hash styling - truncated addresses */
+  .hash {
+    @apply font-mono text-primary break-all;
+  }
+  
+  .hash-truncated {
+    @apply font-mono text-primary;
+  }
+  
+  .hash-full {
+    @apply font-mono text-primary text-xs break-all bg-muted/30 px-2 py-1 rounded;
   }
 
-  .box-glow {
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  /* Status badges */
+  .status-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono rounded-sm uppercase tracking-wider;
+  }
+  
+  .status-confirmed {
+    @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30;
+  }
+  
+  .status-pending {
+    @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30;
+  }
+  
+  .status-failed {
+    @apply bg-red-500/20 text-red-400 border border-red-500/30;
+  }
+
+  /* Data row - explorer table row */
+  .data-row {
+    @apply border-b border-border hover:bg-muted/20 transition-colors;
+  }
+
+  .data-cell {
+    @apply px-4 py-3 text-sm font-mono text-muted-foreground;
+  }
+  
+  .data-cell-primary {
+    @apply px-4 py-3 text-sm font-mono text-primary;
+  }
+
+  /* Transaction hash badge */
+  .tx-badge {
+    @apply inline-flex items-center gap-1 px-2 py-1 text-xs font-mono bg-muted/50 border border-border rounded-sm text-primary hover:bg-muted/70 cursor-pointer transition-colors;
+  }
+
+  /* Block number */
+  .block-number {
+    @apply inline-flex items-center justify-center min-w-[80px] px-3 py-1.5 text-sm font-mono bg-muted/50 border border-border rounded-sm text-primary;
+  }
+
+  /* Technical info row */
+  .tech-info {
+    @apply flex items-center justify-between py-2 border-b border-border/50 text-sm font-mono;
+  }
+
+  .tech-label {
+    @apply text-muted-foreground uppercase tracking-wider text-xs;
+  }
+
+  .tech-value {
+    @apply text-foreground;
+  }
+
+  /* Network indicator */
+  .network-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+  
+  .network-connected {
+    @apply bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)];
+  }
+  
+  .network-disconnected {
+    @apply bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)];
+  }
+
+  /* Gas info */
+  .gas-info {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono bg-muted/50 border border-border rounded-sm;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    @apply p-1 text-muted-foreground hover:text-primary transition-colors cursor-pointer;
+  }
+
+  /* Block visual */
+  .block-visual {
+    @apply w-16 h-16 border-2 border-primary/30 bg-primary/5 rounded-sm flex items-center justify-center relative overflow-hidden;
+  }
+  
+  .block-visual::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent;
+  }
+
+  /* Data highlight */
+  .data-highlight {
+    @apply text-primary font-mono bg-primary/10 px-1 rounded;
   }
 
   /* Terminal cursor blink */
@@ -118,20 +237,43 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
 
-/* Minimal fade-in animation */
-@keyframes fade-in {
-  from {
-    opacity: 0;
+  /* Glow effects */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
   }
-  to {
-    opacity: 1;
-  }
-}
 
-.animate-fade-in {
-  animation: fade-in 0.4s ease-out forwards;
+  .box-glow {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+
+  /* Pulse for pending */
+  @keyframes pulse-pending {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .animate-pulse-pending {
+    animation: pulse-pending 1.5s ease-in-out infinite;
+  }
 }
 
 /* Selection styling */
@@ -144,4 +286,23 @@
 :focus-visible {
   outline: 2px solid #00f0ff;
   outline-offset: 2px;
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(222, 47%, 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(215, 14%, 25%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(215, 14%, 35%);
 }

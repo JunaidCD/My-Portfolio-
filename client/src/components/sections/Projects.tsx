@@ -1,14 +1,19 @@
 import { Reveal } from "../Reveal";
 import { motion } from "framer-motion";
-import { ExternalLink, FolderGit2, ArrowRight, Box } from "lucide-react";
+import { ExternalLink, ArrowRight, Box, Hash, Database, DollarSign, Copy, Check } from "lucide-react";
+import { useState } from "react";
 
 const FEATURED_REPOS = [
   { 
     name: "FinBridge", 
-    description: "A cross-chain financial bridge protocol enabling seamless asset transfer between chains.", 
+    description: "Cross-chain financial bridge protocol enabling seamless asset transfer between chains.", 
     language: "Solidity", 
     url: "https://github.com/JunaidCD/FinBridge",
     category: "DeFi",
+    contractAddress: "0x742d35Cc6634C0532925a3b844Bc9e7595f4B3E7",
+    txCount: 12847,
+    tvl: "$5.2M",
+    status: "confirmed",
   },
   { 
     name: "Credence", 
@@ -16,6 +21,10 @@ const FEATURED_REPOS = [
     language: "Solidity", 
     url: "https://github.com/JunaidCD/Credence",
     category: "Identity",
+    contractAddress: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    txCount: 5621,
+    tvl: "$850K",
+    status: "confirmed",
   },
   { 
     name: "AyurherbX", 
@@ -23,6 +32,10 @@ const FEATURED_REPOS = [
     language: "Solidity", 
     url: "https://github.com/JunaidCD/AyurherbX",
     category: "Supply Chain",
+    contractAddress: "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+    txCount: 3421,
+    tvl: "$120K",
+    status: "confirmed",
   },
   { 
     name: "ERC20-Mock-USDC", 
@@ -30,6 +43,10 @@ const FEATURED_REPOS = [
     language: "Solidity", 
     url: "https://github.com/JunaidCD/ERC20-Mock-USDC",
     category: "Infrastructure",
+    contractAddress: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    txCount: 8942,
+    tvl: "N/A",
+    status: "confirmed",
   },
   { 
     name: "StakingDapp", 
@@ -37,6 +54,10 @@ const FEATURED_REPOS = [
     language: "Solidity", 
     url: "https://github.com/JunaidCD/StakingDapp",
     category: "DeFi",
+    contractAddress: "0x53E0bca35eC356BD5ddDFEbdD1Fc0fD03FaBad39",
+    txCount: 7653,
+    tvl: "$3.8M",
+    status: "confirmed",
   },
   { 
     name: "D-Appazon", 
@@ -44,65 +65,121 @@ const FEATURED_REPOS = [
     language: "Solidity", 
     url: "https://github.com/JunaidCD/D-Appazon",
     category: "dApp",
+    contractAddress: "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+    txCount: 4128,
+    tvl: "$450K",
+    status: "confirmed",
   },
 ];
 
 export function Projects() {
+  const [copiedHash, setCopiedHash] = useState<string | null>(null);
+
+  const copyHash = (hash: string) => {
+    navigator.clipboard.writeText(hash);
+    setCopiedHash(hash);
+    setTimeout(() => setCopiedHash(null), 2000);
+  };
+
+  const truncateHash = (hash: string) => {
+    return `${hash.slice(0, 6)}...${hash.slice(-4)}`;
+  };
+
   return (
-    <section id="projects" className="py-24 relative border-t border-white/5">
+    <section id="projects" className="py-24 relative border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <Reveal>
-          <div className="flex flex-col items-center text-center mb-16">
-            <span className="text-sm font-mono text-primary tracking-widest uppercase mb-4">03. Projects</span>
-            <h3 className="text-3xl md:text-5xl font-bold mb-4">
+          <div className="flex flex-col items-start mb-12">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xs font-mono text-primary">03.</span>
+              <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">Projects</span>
+            </div>
+            <h3 className="text-3xl md:text-5xl font-bold">
               Featured <span className="text-primary">Work</span>
             </h3>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {FEATURED_REPOS.map((repo, index) => (
-            <Reveal key={repo.name} delay={index * 0.1}>
-              <motion.a 
-                href={repo.url} 
-                target="_blank" 
-                rel="noreferrer"
-                className="block h-full group"
-                whileHover={{ y: -2 }}
-              >
-                <div className="glass-card p-5 rounded-xl h-full flex flex-col">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <FolderGit2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <span className="px-2 py-1 text-xs font-mono rounded-md bg-white/5 text-muted-foreground">
-                      {repo.category}
-                    </span>
-                  </div>
-                  
-                  <h4 className="text-white font-medium mb-2 group-hover:text-primary transition-colors">
-                    {repo.name}
-                  </h4>
-                  
-                  <p className="text-sm text-muted-foreground flex-grow mb-4 leading-relaxed">
-                    {repo.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between text-xs font-mono pt-4 border-t border-white/5">
-                    <span className="text-muted-foreground">{repo.language}</span>
-                    <span className="text-primary group-hover:text-primary/70 transition-colors">
-                      View →
-                    </span>
-                  </div>
-                </div>
-              </motion.a>
-            </Reveal>
-          ))}
-        </div>
+        {/* Projects Table */}
+        <Reveal>
+          <div className="block-card rounded-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Project</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Category</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Contract</th>
+                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">TXs</th>
+                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">TVL</th>
+                    <th className="px-4 py-3 text-center text-[10px] font-mono uppercase">Status</th>
+                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {FEATURED_REPOS.map((repo, index) => (
+                    <tr key={repo.name} className="data-row">
+                      <td className="px-4 py-4">
+                        <div>
+                          <div className="font-mono text-sm text-white font-medium">{repo.name}</div>
+                          <div className="text-xs text-muted-foreground font-mono mt-0.5 max-w-[200px]">{repo.description}</div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <span className="px-2 py-1 text-[10px] font-mono bg-muted/50 border border-border rounded text-muted-foreground">
+                          {repo.category}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-1">
+                          <code className="text-xs font-mono text-primary">{truncateHash(repo.contractAddress)}</code>
+                          <button 
+                            onClick={() => copyHash(repo.contractAddress)}
+                            className="p-1 text-muted-foreground hover:text-primary transition-colors"
+                          >
+                            {copiedHash === repo.contractAddress ? (
+                              <Check className="w-3 h-3" />
+                            ) : (
+                              <Copy className="w-3 h-3" />
+                            )}
+                          </button>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-right">
+                        <div className="flex items-center justify-end gap-1 text-sm font-mono text-muted-foreground">
+                          <Database className="w-3 h-3" />
+                          {repo.txCount.toLocaleString()}
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-right">
+                        <span className="text-sm font-mono text-emerald-400">{repo.tvl}</span>
+                      </td>
+                      <td className="px-4 py-4 text-center">
+                        <span className="status-badge status-confirmed">
+                          {repo.status === 'confirmed' ? '●' : '○'} {repo.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 text-right">
+                        <a 
+                          href={repo.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary/70 transition-colors"
+                        >
+                          View <ArrowRight className="w-3 h-3" />
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Reveal>
         
         <Reveal delay={0.4}>
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <a 
               href="https://github.com/JunaidCD" 
               target="_blank" 
