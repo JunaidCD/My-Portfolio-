@@ -1,6 +1,6 @@
 import { Reveal } from "../Reveal";
 import { motion } from "framer-motion";
-import { Trophy, Code2, Mic2, ShieldCheck, BookOpen, ExternalLink, Award, Calendar, Hash } from "lucide-react";
+import { Trophy, Code2, Mic2, ShieldCheck, BookOpen, ExternalLink, Award, Calendar, Hash, Terminal, CheckCircle, FileText } from "lucide-react";
 
 const achievements = [
   {
@@ -63,63 +63,73 @@ const achievements = [
 
 export function Achievements() {
   return (
-    <section id="achievements" className="py-24 relative border-t border-border">
+    <section id="achievements" className="py-24 relative border-t border-[#00ff41]/20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <Reveal>
-          <div className="flex flex-col items-start mb-12">
+          <div className="flex flex-col items-start mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-mono text-primary">04.</span>
-              <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">Achievements</span>
+              <span className="text-xs font-mono text-[#00ff41]">04.</span>
+              <span className="text-sm font-mono text-[#00ff41]/60 tracking-widest uppercase">Achievements</span>
             </div>
-            <h3 className="text-3xl md:text-5xl font-bold">
-              Key <span className="text-primary">Achievements</span>
+            <h3 className="text-3xl md:text-5xl font-bold font-mono">
+              Key <span className="text-[#00ff41]">Achievements</span>
             </h3>
           </div>
         </Reveal>
 
-        {/* Achievements Data Table */}
+        {/* Terminal log style */}
         <Reveal>
-          <div className="block-card rounded-sm overflow-hidden">
+          <div className="bg-black/80 border border-[#00ff41]/30 rounded-sm overflow-hidden mb-6">
+            <div className="flex items-center justify-between px-3 py-2 bg-[#00ff41]/10 border-b border-[#00ff41]/20">
+              <div className="flex items-center gap-2">
+                <Terminal className="w-3 h-3 text-[#00ff41]" />
+                <span className="text-xs font-mono text-[#00ff41]/70">root@achievements:~/logs</span>
+              </div>
+              <span className="text-[10px] font-mono text-[#00ff41]/50">
+                {achievements.length} entries
+              </span>
+            </div>
+            
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase w-24">ID</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Achievement</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase w-32">Date</th>
-                    <th className="px-4 py-3 text-center text-[10px] font-mono uppercase w-24">Status</th>
+                  <tr className="border-b border-[#00ff41]/20">
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase text-[#00ff41]/50 w-24">ID</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase text-[#00ff41]/50">Achievement</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase text-[#00ff41]/50 w-32">Date</th>
+                    <th className="px-4 py-3 text-center text-[10px] font-mono uppercase text-[#00ff41]/50 w-24">Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="font-mono text-xs">
                   {achievements.map((item, index) => (
-                    <tr key={item.id} className="data-row">
-                      <td className="px-4 py-4">
+                    <tr key={item.id} className="border-b border-[#00ff41]/10 hover:bg-[#00ff41]/5 transition-colors">
+                      <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <Hash className="w-3 h-3 text-muted-foreground" />
-                          <span className="text-xs font-mono text-primary">{item.id}</span>
+                          <Hash className="w-3 h-3 text-[#00ff41]/50" />
+                          <span className="text-[#00ff41]">{item.id}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 shrink-0 rounded-sm bg-primary/10 flex items-center justify-center mt-0.5">
-                            <item.icon className="w-4 h-4 text-primary" />
+                          <div className="w-6 h-6 shrink-0 rounded-sm bg-[#00ff41]/10 flex items-center justify-center mt-0.5">
+                            <item.icon className="w-3 h-3 text-[#00ff41]" />
                           </div>
                           <div>
-                            <div className="text-sm font-mono text-white mb-1">{item.title}</div>
-                            <div className="text-xs text-muted-foreground font-mono leading-relaxed">{item.desc}</div>
+                            <div className="text-white mb-1">{item.title}</div>
+                            <div className="text-[10px] text-[#00ff41]/50 leading-relaxed">{item.desc}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-1.5 text-[#00ff41]/70">
                           <Calendar className="w-3 h-3" />
                           {item.date}
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-center">
-                        <span className="status-badge status-confirmed">
-                          {item.status === 'confirmed' ? '●' : '○'} {item.status}
+                      <td className="px-4 py-3 text-center">
+                        <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-sm">
+                          ● {item.status}
                         </span>
                       </td>
                     </tr>
@@ -130,41 +140,42 @@ export function Achievements() {
           </div>
         </Reveal>
 
-        {/* Summary Stats */}
+        {/* Summary stats - Terminal style */}
         <Reveal delay={0.4}>
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            <div className="block-card p-4 rounded-sm text-center">
-              <div className="text-2xl font-mono text-primary mb-1">{achievements.length}</div>
-              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Total Records</div>
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="bg-black/60 border border-[#00ff41]/20 p-3 rounded-sm text-center">
+              <div className="text-xl font-mono text-[#00ff41] mb-1">{achievements.length}</div>
+              <div className="text-[10px] font-mono text-[#00ff41]/50 uppercase tracking-wider">Total Records</div>
             </div>
-            <div className="block-card p-4 rounded-sm text-center">
-              <div className="text-2xl font-mono text-emerald-400 mb-1">
+            <div className="bg-black/60 border border-[#00ff41]/20 p-3 rounded-sm text-center">
+              <div className="text-xl font-mono text-emerald-400 mb-1">
                 {achievements.filter(a => a.status === 'confirmed').length}
               </div>
-              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Confirmed</div>
+              <div className="text-[10px] font-mono text-[#00ff41]/50 uppercase tracking-wider">Confirmed</div>
             </div>
-            <div className="block-card p-4 rounded-sm text-center">
-              <div className="text-2xl font-mono text-yellow-400 mb-1">7</div>
-              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">2024-2025</div>
+            <div className="bg-black/60 border border-[#00ff41]/20 p-3 rounded-sm text-center">
+              <div className="text-xl font-mono text-yellow-400 mb-1">7</div>
+              <div className="text-[10px] font-mono text-[#00ff41]/50 uppercase tracking-wider">2024-2025</div>
             </div>
           </div>
         </Reveal>
 
+        {/* View documents link - Terminal style */}
         <Reveal delay={0.6}>
-          <div className="mt-8 block-card p-4 rounded-sm">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="bg-black/80 border border-[#00ff41]/30 rounded-sm overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4">
               <div className="text-center md:text-left">
                 <h4 className="text-sm font-mono text-white mb-1">Want to See More?</h4>
-                <p className="text-xs text-muted-foreground font-mono">Access all certificates and awards</p>
+                <p className="text-xs text-[#00ff41]/50 font-mono">Access all certificates and awards</p>
               </div>
               <a 
                 href="https://drive.google.com/drive/folders/1m8zcciOoGQmo_aZ2wSZp-WW2ouVhXiUI" 
                 target="_blank" 
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-primary text-primary-foreground text-xs font-mono hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-[#00ff41] text-black text-xs font-mono hover:bg-[#00ff41]/90 transition-colors"
               >
-                <ExternalLink className="w-3 h-3" />
-                View Documents
+                <FileText className="w-3 h-3" />
+                ./view-certificates.sh
               </a>
             </div>
           </div>

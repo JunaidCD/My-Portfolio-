@@ -1,6 +1,6 @@
 import { Reveal } from "../Reveal";
 import { motion } from "framer-motion";
-import { ExternalLink, ArrowRight, Box, Hash, Database, DollarSign, Copy, Check } from "lucide-react";
+import { ExternalLink, ArrowRight, GitBranch, GitCommit, Folder, Database, DollarSign, Copy, Check, Terminal, Code } from "lucide-react";
 import { useState } from "react";
 
 const FEATURED_REPOS = [
@@ -14,6 +14,8 @@ const FEATURED_REPOS = [
     txCount: 12847,
     tvl: "$5.2M",
     status: "confirmed",
+    lastCommit: "feat: optimize gas for cross-chain transfers",
+    commitHash: "7d2f8e",
   },
   { 
     name: "Credence", 
@@ -25,6 +27,8 @@ const FEATURED_REPOS = [
     txCount: 5621,
     tvl: "$850K",
     status: "confirmed",
+    lastCommit: "feat: add reputation scoring module",
+    commitHash: "3a1b9c",
   },
   { 
     name: "AyurherbX", 
@@ -36,9 +40,11 @@ const FEATURED_REPOS = [
     txCount: 3421,
     tvl: "$120K",
     status: "confirmed",
+    lastCommit: "feat: implement IPFS storage integration",
+    commitHash: "5f",
   },
   { 
-    name: "ERC20-Mock-USDC", 
+    name: "ERC208e1a-Mock-USDC", 
     description: "Mock USDC implementation for testing DeFi protocols with realistic token behavior.", 
     language: "Solidity", 
     url: "https://github.com/JunaidCD/ERC20-Mock-USDC",
@@ -47,6 +53,8 @@ const FEATURED_REPOS = [
     txCount: 8942,
     tvl: "N/A",
     status: "confirmed",
+    lastCommit: "test: add comprehensive mock scenarios",
+    commitHash: "9c2d7f",
   },
   { 
     name: "StakingDapp", 
@@ -58,6 +66,8 @@ const FEATURED_REPOS = [
     txCount: 7653,
     tvl: "$3.8M",
     status: "confirmed",
+    lastCommit: "feat: implement reward auto-compounding",
+    commitHash: "4e8b2a",
   },
   { 
     name: "D-Appazon", 
@@ -69,6 +79,8 @@ const FEATURED_REPOS = [
     txCount: 4128,
     tvl: "$450K",
     status: "confirmed",
+    lastCommit: "feat: add NFT loyalty tier system",
+    commitHash: "6f9c3d",
   },
 ];
 
@@ -86,57 +98,104 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 relative border-t border-border">
+    <section id="projects" className="py-24 relative border-t border-[#00ff41]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <Reveal>
-          <div className="flex flex-col items-start mb-12">
+          <div className="flex flex-col items-start mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-mono text-primary">03.</span>
-              <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">Projects</span>
+              <span className="text-xs font-mono text-[#00ff41]">03.</span>
+              <span className="text-sm font-mono text-[#00ff41]/60 tracking-widest uppercase">Projects</span>
             </div>
-            <h3 className="text-3xl md:text-5xl font-bold">
-              Featured <span className="text-primary">Work</span>
+            <h3 className="text-3xl md:text-5xl font-bold font-mono">
+              Featured <span className="text-[#00ff41]">Work</span>
             </h3>
           </div>
         </Reveal>
 
-        {/* Projects Table */}
+        {/* Git log style header */}
         <Reveal>
-          <div className="block-card rounded-sm overflow-hidden">
+          <div className="bg-black/80 border border-[#00ff41]/30 rounded-sm overflow-hidden mb-4">
+            <div className="flex items-center justify-between px-3 py-2 bg-[#00ff41]/10 border-b border-[#00ff41]/20">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                </div>
+                <span className="ml-2 text-xs font-mono text-[#00ff41]/70">root@projects:~/repos</span>
+              </div>
+            </div>
+            <div className="p-3 font-mono text-xs">
+              <div className="text-[#00ff41]/50">
+                {'>'} git log --oneline -n 6
+              </div>
+              <div className="mt-2 space-y-1">
+                {FEATURED_REPOS.slice(0, 3).map((repo, i) => (
+                  <div key={i} className="flex items-center gap-2 text-[#00ff41]/70">
+                    <GitCommit className="w-3 h-3" />
+                    <span className="text-yellow-400">{repo.commitHash}</span>
+                    <span className="text-white">{repo.lastCommit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+        
+        {/* Projects list - ls style */}
+        <Reveal>
+          <div className="bg-black/80 border border-[#00ff41]/30 rounded-sm overflow-hidden">
+            <div className="flex items-center justify-between px-3 py-2 bg-[#00ff41]/10 border-b border-[#00ff41]/20">
+              <div className="flex items-center gap-2">
+                <Folder className="w-3 h-3 text-[#00ff41]" />
+                <span className="text-xs font-mono text-[#00ff41]/70">total: {FEATURED_REPOS.length} projects</span>
+              </div>
+              <span className="text-[10px] font-mono text-[#00ff41]/50">drwxr-xr-x</span>
+            </div>
+            
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Project</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Category</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-mono uppercase">Contract</th>
-                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">TXs</th>
-                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">TVL</th>
-                    <th className="px-4 py-3 text-center text-[10px] font-mono uppercase">Status</th>
-                    <th className="px-4 py-3 text-right text-[10px] font-mono uppercase">Action</th>
+                  <tr className="text-left border-b border-[#00ff41]/20">
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50">Project</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50">Category</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50">Contract</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50 text-right">TXs</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50 text-right">TVL</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50 text-center">Status</th>
+                    <th className="px-4 py-3 text-[10px] font-mono uppercase text-[#00ff41]/50 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="font-mono text-xs">
                   {FEATURED_REPOS.map((repo, index) => (
-                    <tr key={repo.name} className="data-row">
-                      <td className="px-4 py-4">
+                    <tr key={repo.name} className="border-b border-[#00ff41]/10 hover:bg-[#00ff41]/5 transition-colors">
+                      <td className="px-4 py-3">
                         <div>
-                          <div className="font-mono text-sm text-white font-medium">{repo.name}</div>
-                          <div className="text-xs text-muted-foreground font-mono mt-0.5 max-w-[200px]">{repo.description}</div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Code className="w-3 h-3 text-[#00ff41]" />
+                            <span className="text-white font-medium">{repo.name}</span>
+                          </div>
+                          <div className="text-[10px] text-[#00ff41]/50 max-w-[200px]">{repo.description}</div>
+                          <div className="flex items-center gap-1 mt-1 text-[10px] text-yellow-400">
+                            <GitBranch className="w-2.5 h-2.5" />
+                            <span>{repo.commitHash}</span>
+                            <span className="text-[#00ff41]/50">-</span>
+                            <span className="text-[#00ff41]/70">{repo.lastCommit}</span>
+                          </div>
                         </div>
                       </td>
-                      <td className="px-4 py-4">
-                        <span className="px-2 py-1 text-[10px] font-mono bg-muted/50 border border-border rounded text-muted-foreground">
+                      <td className="px-4 py-3">
+                        <span className="px-2 py-1 text-[10px] font-mono bg-[#00ff41]/10 border border-[#00ff41]/20 rounded text-[#00ff41]">
                           {repo.category}
                         </span>
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-center gap-1">
-                          <code className="text-xs font-mono text-primary">{truncateHash(repo.contractAddress)}</code>
+                          <code className="text-[10px] font-mono text-[#00ff41]">{truncateHash(repo.contractAddress)}</code>
                           <button 
                             onClick={() => copyHash(repo.contractAddress)}
-                            className="p-1 text-muted-foreground hover:text-primary transition-colors"
+                            className="p-1 text-[#00ff41]/50 hover:text-[#00ff41] transition-colors"
                           >
                             {copiedHash === repo.contractAddress ? (
                               <Check className="w-3 h-3" />
@@ -146,28 +205,28 @@ export function Projects() {
                           </button>
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-right">
-                        <div className="flex items-center justify-end gap-1 text-sm font-mono text-muted-foreground">
+                      <td className="px-4 py-3 text-right">
+                        <div className="flex items-center justify-end gap-1 text-[#00ff41]/70">
                           <Database className="w-3 h-3" />
                           {repo.txCount.toLocaleString()}
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-right">
+                      <td className="px-4 py-3 text-right">
                         <span className="text-sm font-mono text-emerald-400">{repo.tvl}</span>
                       </td>
-                      <td className="px-4 py-4 text-center">
-                        <span className="status-badge status-confirmed">
-                          {repo.status === 'confirmed' ? '●' : '○'} {repo.status}
+                      <td className="px-4 py-3 text-center">
+                        <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-sm">
+                          ● {repo.status}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-right">
+                      <td className="px-4 py-3 text-right">
                         <a 
                           href={repo.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary/70 transition-colors"
+                          className="inline-flex items-center gap-1 text-xs font-mono text-[#00ff41] hover:text-[#00ff41]/70 transition-colors"
                         >
-                          View <ArrowRight className="w-3 h-3" />
+                          clone <ArrowRight className="w-3 h-3" />
                         </a>
                       </td>
                     </tr>
@@ -179,15 +238,15 @@ export function Projects() {
         </Reveal>
         
         <Reveal delay={0.4}>
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <a 
               href="https://github.com/JunaidCD" 
               target="_blank" 
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-mono text-[#00ff41]/60 hover:text-[#00ff41] transition-colors"
             >
-              <Box className="w-4 h-4" />
-              View full archive on GitHub 
+              <Terminal className="w-4 h-4" />
+              ./view-full-archive.sh
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

@@ -1,67 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Blockchain Explorer Theme - Etherscan/Blockscout Inspired */
-  --font-sans: 'Inter', sans-serif;
+  /* Terminal/Hacker Theme */
+  --font-sans: 'Fira Code', 'JetBrains Mono', monospace;
   --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
 
-  /* Deep dark background */
-  --background: 222 47% 3%;
-  --foreground: 0 0% 100%;
+  /* Pure black background */
+  --background: 0 0% 0%;
+  --foreground: 120 100% 65%;
 
-  --card: 222 47% 5%;
-  --card-foreground: 0 0% 100%;
+  /* Terminal card colors */
+  --card: 0 0% 3%;
+  --card-foreground: 120 100% 65%;
 
-  --popover: 222 47% 5%;
-  --popover-foreground: 0 0% 100%;
+  --popover: 0 0% 3%;
+  --popover-foreground: 120 100% 65%;
 
-  /* Cyan accent for blockchain */
-  --primary: 187 100% 50%;
-  --primary-foreground: 222 47% 3%;
+  /* Green terminal primary */
+  --primary: 120 100% 50%;
+  --primary-foreground: 0 0% 0%;
   
-  /* Muted for secondary text */
-  --secondary: 215 14% 25%;
-  --secondary-foreground: 0 0% 100%;
+  /* Amber secondary */
+  --secondary: 45 100% 50%;
+  --secondary-foreground: 0 0% 0%;
 
-  --muted: 215 14% 12%;
-  --muted-foreground: 215 14% 60%;
+  /* Cyan accent */
+  --accent: 185 100% 50%;
+  --accent-foreground: 0 0% 0%;
 
-  --accent: 187 100% 50%;
-  --accent-foreground: 222 47% 3%;
+  /* Muted terminal colors */
+  --muted: 0 0% 8%;
+  --muted-foreground: 0 0% 40%;
 
   /* Status colors */
-  --success: 142 76% 36%;
-  --success-foreground: 0 0% 100%;
-  --warning: 38 92% 50%;
+  --success: 120 100% 40%;
+  --success-foreground: 0 0% 0%;
+  --warning: 45 100% 50%;
   --warning-foreground: 0 0% 0%;
-  --error: 0 84% 60%;
-  --error-foreground: 0 0% 100%;
-  --info: 199 89% 48%;
-  --info-foreground: 0 0% 100%;
+  --error: 0 100% 60%;
+  --error-foreground: 0 0% 0%;
+  --info: 185 100% 50%;
+  --info-foreground: 0 0% 0%;
 
-  --border: 215 14% 18%;
-  --input: 215 14% 10%;
-  --ring: 187 100% 50%;
+  /* Terminal borders */
+  --border: 0 0% 15%;
+  --input: 0 0% 10%;
+  --ring: 120 100% 50%;
 
-  --radius: 0.25rem;
+  --radius: 0;
 }
 
 @layer base {
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     background: 
-      radial-gradient(ellipse at top, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
-      linear-gradient(180deg, hsl(222, 47%, 3%) 0%, hsl(222, 47%, 5%) 100%);
+      radial-gradient(ellipse at top, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 2%) 100%);
     min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* CRT scanline effect overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
+    font-family: var(--font-mono);
   }
   
   code, pre, .font-mono {
@@ -83,13 +108,15 @@
 }
 
 @layer utilities {
-  /* Blockchain card - explorer style */
+  /* Terminal card - hacker style */
   .block-card {
     @apply bg-card border border-border rounded-sm transition-all duration-200;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.05);
   }
 
   .block-card:hover {
-    @apply border-primary/40 shadow-[0_0_20px_rgba(0,240,255,0.1)];
+    @apply border-primary/40;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
   }
 
   /* Hash styling - truncated addresses */
@@ -122,7 +149,7 @@
     @apply bg-red-500/20 text-red-400 border border-red-500/30;
   }
 
-  /* Data row - explorer table row */
+  /* Data row - terminal table row */
   .data-row {
     @apply border-b border-border hover:bg-muted/20 transition-colors;
   }
@@ -135,27 +162,262 @@
     @apply px-4 py-3 text-sm font-mono text-primary;
   }
 
-  /* Transaction hash badge */
-  .tx-badge {
-    @apply inline-flex items-center gap-1 px-2 py-1 text-xs font-mono bg-muted/50 border border-border rounded-sm text-primary hover:bg-muted/70 cursor-pointer transition-colors;
+  /* Terminal cursor blink */
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
   }
 
-  /* Block number */
-  .block-number {
-    @apply inline-flex items-center justify-center min-w-[80px] px-3 py-1.5 text-sm font-mono bg-muted/50 border border-border rounded-sm text-primary;
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
-  /* Technical info row */
-  .tech-info {
-    @apply flex items-center justify-between py-2 border-b border-border/50 text-sm font-mono;
+  /* Blinking underscore cursor */
+  .cursor-underscore {
+    display: inline-block;
+    animation: underscore-blink 1s step-end infinite;
   }
 
-  .tech-label {
-    @apply text-muted-foreground uppercase tracking-wider text-xs;
+  @keyframes underscore-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
-  .tech-value {
-    @apply text-foreground;
+  /* Scanline animation */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+  }
+
+  /* Grid pattern */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Terminal scrollbar */
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glow effects - terminal green */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  }
+
+  .text-glow-amber {
+    text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+
+  .box-glow {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  }
+
+  .box-glow-amber {
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.2);
+  }
+
+  /* Terminal prompt styling */
+  .terminal-prompt::before {
+    content: '$ ';
+    @apply text-primary;
+  }
+
+  .terminal-prompt-root::before {
+    content: '# ';
+    @apply text-error;
+  }
+
+  /* ASCII art styling */
+  .ascii-art {
+    @apply text-primary text-xs leading-tight whitespace-pre;
+  }
+
+  .ascii-art-amber {
+    @apply text-yellow-400 text-xs leading-tight whitespace-pre;
+  }
+
+  /* Boot sequence animation */
+  @keyframes boot-text {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate-boot {
+    animation: boot-text 0.1s ease-out forwards;
+  }
+
+  /* Typing effect */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .animate-typing {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(40, end);
+  }
+
+  /* Matrix rain effect */
+  @keyframes matrix-rain {
+    0% { transform: translateY(-100%); opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+
+  /* Terminal boot loading */
+  @keyframes boot-loading {
+    0%, 20% { content: '█'; }
+    40% { content: '██'; }
+    60% { content: '███'; }
+    80%, 100% { content: '████'; }
+  }
+
+  .boot-loading::after {
+    content: '';
+    animation: boot-loading 2s steps(4) infinite;
+  }
+
+  /* CRT flicker effect */
+  @keyframes crt-flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.95; }
+    10% { opacity: 0.9; }
+    15% { opacity: 0.95; }
+    20% { opacity: 0.99; }
+    50% { opacity: 0.95; }
+    80% { opacity: 0.9; }
+    100% { opacity: 0.97; }
+  }
+
+  .crt-flicker {
+    animation: crt-flicker 0.15s infinite;
+  }
+
+  /* System log styling */
+  .system-log {
+    @apply font-mono text-xs;
+  }
+
+  .log-info {
+    @apply text-primary;
+  }
+
+  .log-warning {
+    @apply text-yellow-400;
+  }
+
+  .log-error {
+    @apply text-red-400;
+  }
+
+  .log-success {
+    @apply text-emerald-400;
+  }
+
+  /* Command output styling */
+  .command-output {
+    @apply text-muted-foreground text-sm;
+  }
+
+  .command-error {
+    @apply text-red-400 text-sm;
+  }
+
+  /* Terminal window chrome */
+  .terminal-window {
+    @apply bg-card border border-border rounded-sm overflow-hidden;
+  }
+
+  .terminal-header {
+    @apply flex items-center justify-between px-3 py-2 bg-muted/50 border-b border-border;
+  }
+
+  .terminal-buttons {
+    @apply flex items-center gap-2;
+  }
+
+  .terminal-btn {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  .terminal-btn-close {
+    @apply bg-red-500;
+  }
+
+  .terminal-btn-minimize {
+    @apply bg-yellow-500;
+  }
+
+  .terminal-btn-maximize {
+    @apply bg-emerald-500;
+  }
+
+  /* Hex dump style */
+  .hex-dump {
+    @apply font-mono text-xs text-primary bg-muted/20 px-2 py-1 rounded;
+  }
+
+  /* Pulse for pending */
+  @keyframes pulse-pending {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .animate-pulse-pending {
+    animation: pulse-pending 1.5s ease-in-out infinite;
   }
 
   /* Network indicator */
@@ -170,121 +432,17 @@
   .network-disconnected {
     @apply bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)];
   }
-
-  /* Gas info */
-  .gas-info {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono bg-muted/50 border border-border rounded-sm;
-  }
-
-  /* Copy button */
-  .copy-btn {
-    @apply p-1 text-muted-foreground hover:text-primary transition-colors cursor-pointer;
-  }
-
-  /* Block visual */
-  .block-visual {
-    @apply w-16 h-16 border-2 border-primary/30 bg-primary/5 rounded-sm flex items-center justify-center relative overflow-hidden;
-  }
-  
-  .block-visual::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent;
-  }
-
-  /* Data highlight */
-  .data-highlight {
-    @apply text-primary font-mono bg-primary/10 px-1 rounded;
-  }
-
-  /* Terminal cursor blink */
-  .cursor-blink {
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* Grid pattern */
-  .grid-pattern {
-    background-image: 
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  /* Terminal scrollbar */
-  .terminal-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  .terminal-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .terminal-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-white/10 rounded-full;
-  }
-  .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-white/20;
-  }
-
-  /* Hide scrollbar */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Glow effects */
-  .text-glow {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-  }
-
-  .box-glow {
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  }
-
-  /* Fade in animation */
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.4s ease-out forwards;
-  }
-
-  /* Pulse for pending */
-  @keyframes pulse-pending {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-  
-  .animate-pulse-pending {
-    animation: pulse-pending 1.5s ease-in-out infinite;
-  }
 }
 
-/* Selection styling */
+/* Selection styling - terminal green */
 ::selection {
-  background: rgba(0, 240, 255, 0.25);
+  background: rgba(0, 255, 65, 0.25);
   color: #fff;
 }
 
 /* Focus visible styling */
 :focus-visible {
-  outline: 2px solid #00f0ff;
+  outline: 2px solid #00ff41;
   outline-offset: 2px;
 }
 
@@ -295,14 +453,29 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(222, 47%, 8%);
+  background: hsl(0, 0%, 5%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(215, 14%, 25%);
-  border-radius: 4px;
+  background: hsl(0, 0%, 20%);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(215, 14%, 35%);
+  background: hsl(120, 100%, 30%);
+}
+
+/* Links in terminal style */
+a {
+  @apply text-primary hover:text-primary/70 transition-colors;
+}
+
+/* Input styling - terminal */
+input, textarea, select {
+  @apply font-mono;
+}
+
+input:focus, textarea:focus, select:focus {
+  @apply border-primary;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
