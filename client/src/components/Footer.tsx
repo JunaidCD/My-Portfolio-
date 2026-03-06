@@ -26,13 +26,13 @@ export function Footer() {
   const technicalLinks = [
     { name: "GitHub", href: "https://github.com/JunaidCD", icon: Github },
     { name: "X", href: "https://x.com/JunaidMollah5", icon: Twitter },
-    { name: "LinkedIn", href: "#", icon: Linkedin },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/junaid-mollah-a59150319/", icon: Linkedin },
   ];
 
   const socialLinks = [
     { name: "GitHub", icon: Github, href: "https://github.com/JunaidCD" },
     { name: "X", icon: Twitter, href: "https://x.com/JunaidMollah5" },
-    { name: "LinkedIn", icon: Linkedin, href: "#" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/junaid-mollah-a59150319/" },
   ];
 
   return (
