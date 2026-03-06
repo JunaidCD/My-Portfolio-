@@ -2,8 +2,6 @@
 
 A modern, interactive personal portfolio website built with React, TypeScript, and Tailwind CSS. Features smooth animations, responsive design, and a full-stack backend for dynamic content management.
 
-![Portfolio Preview](attached_assets/Screenshot_2026-03-05_144944_1772702465457.png)
-
 ## 🚀 Tech Stack
 
 ### Frontend
